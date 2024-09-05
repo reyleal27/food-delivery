@@ -50,12 +50,62 @@ module.exports = {
             const foods = await Food.find(query).populate([
                 { path: "ingredients", populate: { path: "category", select: "name" } },
                 "FoodCategory",
-                { path: "restaurant", select: "name_id"},
+                { path: "restaurant", select: "name _id"},
             ]);
         } catch (error) {
             throw new Error(`Failed to retrieve restaurant's food: ${error.message}`);
         };
-    }
+    },
+
+    searchFood: async (keyword) => {
+        try {
+            let query = {};
+            if (keyword) {
+                query.$or = [
+                    { name: { $regex: keyword, $options: "i" } },
+                    { "foodCategory.name": { $regex: keyword, $options: "i" } },
+                ];
+            }
+            const foods = await Food.find(query);
+            return foods;
+        } catch (error) {
+            throw new Error(`Failed to search for food: ${error.message}`);
+        }
+    },
+
+
+    updateAvailabilityStatus: async (foodId) =>{
+        try {
+            const food = await Food.findById(foodId).populate([
+                { path: "ingredients", populate: { path: "category", select: "name" } },
+                "foodCategory",
+                { path: "restaurant", select: "name _id" }
+            ]);
+            if (!food) {
+                throw new Error(`Food not found with ID ${foodId}`);
+            }
+            food.available = !food.available;
+
+        } catch (error) {
+            throw new Error(`Failed to update availability status for food with Id ${foodId}: ${error.message}`);
+        };
+    },
+
+
+    findFoodById: async (foodId) => {
+        try {
+            const food = await Food.findById(foodId);
+            if (!food) {
+                throw new Error(`Food not found with ID ${foodId}`);
+            }
+            return food;
+        } catch (error) {
+            throw new Error(`Failed to find food with ID ${foodId}: ${error.message}`);    
+        };
+    },
+
+
+    
 
 
 }
