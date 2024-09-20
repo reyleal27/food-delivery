@@ -12,6 +12,8 @@ const cartItemSchema = new Schema({
     quantity: Number,
     ingredients: [String],
     totalPrice: Number,
+    discountedPrice: Number,
+    
 });
 
 const CartItem = model("CartItem", cartItemSchema);
