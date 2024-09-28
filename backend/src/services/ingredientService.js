@@ -73,7 +73,18 @@ module.exports = {
             if (!category) {
                 throw new Error(`Ingredient category not found with id ${ingredientCategoryId}`)
             }
+
+            let item = await IngredientsItem.findOne({
+                restaurant: restaurantId,
+                name: ingredientName,
+                category: category_.id,
+            });
+
+            if (item) {
+                return item;
+            }
         }
+
 
     }
 }
