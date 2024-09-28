@@ -102,7 +102,21 @@ module.exports = {
         } catch (error) {
             throw new Error(`Failed to create ingredients item: ${error.message}`)
         }
+    },
 
+    async updateStock(id) {
+        try {
+            const item = await IngredientsItem.findById(id).populate("category");
+            if (!item) {
+                throw new Error(`Ingredient not found with ID ${id}`);
+            }
 
-    }
+            item.inStock = !item.inStock;
+            await item.save();
+            return item;
+        } catch (error) {
+            throw new Error(`Failed to update ingredient stock status with ID ${id}: ${error.message}`)
+        }
+    },
+
 }
