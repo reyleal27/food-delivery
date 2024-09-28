@@ -58,6 +58,22 @@ module.exports = {
         try {
             const items = await IngredientsItem.find({ restaurant: restaurantId }).populate("category");
             return items;
+        } catch (error) {
+            throw new Error(`Failed to find ingredients for restaurant with ID ${restaurantId}: ${error.message}`);
         }
+    },
+
+
+    async createIngredientItem(restaurantId, ingredientName, ingredientCategoryId) {
+        try {
+            const category = await this.findIngredientsCategoryById(
+                ingredientCategoryId
+            );
+
+            if (!category) {
+                throw new Error(`Ingredient category not found with id ${ingredientCategoryId}`)
+            }
+        }
+
     }
 }
