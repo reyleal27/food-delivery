@@ -83,6 +83,24 @@ module.exports = {
             if (item) {
                 return item;
             }
+
+            const restaurant = await Restaurant.findById(restaurantId);
+            if (!restaurant) {
+                throw new Error(`Restaurant not found with ID ${restaurantId}`);
+            }
+
+            item = new IngredientsItem({
+                name: ingredientName,
+                restaurant: restaurantId,
+                category: category._id,
+            });
+
+            const savedItem = await item.save();
+            category.ingredients.push(savedItem._id);
+            await category.save();
+            return savedItem;
+        } catch (error) {
+            throw new Error(`Failed to create ingredients item: ${error.message}`)
         }
 
 
