@@ -1,4 +1,3 @@
-const { search } = require('..');
 const foodService = require('../services/foodService');
 const restaurantService = require('../services/restaurantService');
 const userService = require('../services/userServices');

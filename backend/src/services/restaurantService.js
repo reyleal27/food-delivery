@@ -26,6 +26,7 @@ module.exports = {
             });
 
             const savedRestaurant = await restaurant.save();
+            return savedRestaurant;
 
         } catch (error) {
             throw new Error(error.message);

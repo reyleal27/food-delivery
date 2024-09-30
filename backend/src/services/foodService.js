@@ -36,6 +36,7 @@ module.exports = {
             throw new Error(`Failed to delete food with ID ${foodId}: ${error.message}`)
         }   
     },
+    
 
     getRestaurantsFood: async (restaurantId,isVegetarian,nonveg,seasonal,foodCategory) => {
         try {

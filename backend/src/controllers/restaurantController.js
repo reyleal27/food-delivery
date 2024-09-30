@@ -94,4 +94,18 @@ module.exports = {
     },
 
 
+    updateRestaurantStatus: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const restaurant = await restaurantService.updateRestaurantStatus(id.toString());
+            res.status(200).json(restaurant);
+        } catch (error) {
+            if (error instanceof Error) {
+                res.status(400).json({ error: error.message });
+            } else {
+                res.status(500).json({error: "Interna server error"})
+            }
+        }
+    }
+
 }

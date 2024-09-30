@@ -8,9 +8,9 @@ const register = async (req, res) => {
         const jwt = generateToken(user._id);
         // await cartService.createCart(user);
         console.log(user)
-        return res.status(201).send({ jwt, message: "register success"});
+        return res.status(201).send({ jwt, message: "register success" });
     } catch (error) {
-        return res.status(500).send({ error: error.message, message:"error here" });
+        return res.status(500).send({ error: error.message, message: "error here" });
     }
 };
 
