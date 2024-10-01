@@ -27,7 +27,7 @@ const MultiItemCarousel = () => {
         {
       breakpoint: 480, // Additional breakpoint for smaller screens
       settings: {
-        slidesToShow: 3,
+        slidesToShow: 2,
         slidesToScroll: 1,
       },
     },
