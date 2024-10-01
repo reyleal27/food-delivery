@@ -9,6 +9,9 @@ const orderRouter = require('./routes/orderRoutes');
 const menuItemRouter = require('./routes/menuItemRoutes');
 const adminRestaurantRouter = require("./routes/adminRestaurantRoutes");
 const adminOrderRouter = require("./routes/adminOrderRoutes");
+const cartRouter = require("./routes/cartRoutes");
+const cartItemRoutes = require('./routes/cartItemRoutes');
+const categoryRouter = require('./routes/categoryRoutes');
 
 
 const app = express();
@@ -32,5 +35,10 @@ app.use("/api/admin/restaurants", adminRestaurantRouter);
 
 app.use("/api/admin/order", adminOrderRouter);
 
+app.use("/api/cart", cartRouter);
+
+app.use('/api/cart-item', cartItemRoutes);
+
+app.use("/api/category", categoryRouter);
 
 module.exports = app;

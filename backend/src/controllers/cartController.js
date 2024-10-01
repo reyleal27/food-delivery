@@ -48,21 +48,21 @@ module.exports = {
         }
     },
 
-    // calculateCartTotals: async (req, res) => {
-    //     try {
-    //         const { jwt } = req.query;
-    //         const user = await userService.findUserProfileByJwt(jwt);
-    //         const cart = await cartService.findCartByUserId(user.getId());
-    //         const total = await cartService.calculateCartTotals(cart);
-    //         res.status(200).json(total);
-    //     }catch (error) {
-    //         if (error instanceof Error) {
-    //             res.status(400).json({ error: error.message });
-    //         } else {
-    //             res.status(500).json({ error: "Internal server error" });
-    //         }
-    //     }
-    // },
+    calculateCartTotals: async (req, res) => {
+        try {
+            const { jwt } = req.query;
+            const user = await userService.findUserProfileByJwt(jwt);
+            const cart = await cartService.findCartByUserId(user.getId());
+            const total = await cartService.calculateCartTotals(cart);
+            res.status(200).json(total);
+        }catch (error) {
+            if (error instanceof Error) {
+                res.status(400).json({ error: error.message });
+            } else {
+                res.status(500).json({ error: "Internal server error" });
+            }
+        }
+    },
 
     findUserCart: async (req, res) => {
         try {
