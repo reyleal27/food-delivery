@@ -12,6 +12,10 @@ const adminOrderRouter = require("./routes/adminOrderRoutes");
 const cartRouter = require("./routes/cartRoutes");
 const cartItemRoutes = require('./routes/cartItemRoutes');
 const categoryRouter = require('./routes/categoryRoutes');
+const adminCategoryRouter = require('./routes/adminCategoryRoutes');
+const adminIngredientsRouter = require('./routes/adminIngredientsRoutes');
+const adminEventRouter = require('./routes/adminEventRoutes');
+const eventRouter = require('./routes/eventRoutes');
 
 
 const app = express();
@@ -40,5 +44,14 @@ app.use("/api/cart", cartRouter);
 app.use('/api/cart-item', cartItemRoutes);
 
 app.use("/api/category", categoryRouter);
+
+app.use("/api/admin/category", adminCategoryRouter);
+
+app.use('/api/admin/ingredients', adminIngredientsRouter);
+
+app.use('/api/admin/events', adminEventRouter);
+
+app.use('/api/events', eventRouter);
+
 
 module.exports = app;
