@@ -1,12 +1,23 @@
-import { Divider } from '@mui/material';
-import React from 'react';
+import { Divider, Modal } from '@mui/material';
+import React, { useState } from 'react';
 import CartItem from './CartItem';
 import BillDetails from './BillDetails';
-import DeliveryAddress from './DeliveryAddress';
+import DeliveryAddress from '../Address/DeliveryAddress';
+import AddressModal from '../Address/AddressModal';
 
 const items = [1, 1, 1, , 1];
 
 const Cart = () => {
+     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openAddressModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeAddressModal = () => {
+        setIsModalOpen(false);
+    };
+    
   return (
       <div>
           <main className='lg:flex justify-between'>
@@ -19,8 +30,9 @@ const Cart = () => {
 
               <Divider orientation='vertical' flexItem />
               <section className='lg:w-[70%] flex justify-center px-5 pb-10 lg:pb-0'>
-                  <DeliveryAddress/>
+                   <DeliveryAddress handleOpenAddressModal={openAddressModal} />
               </section>
+              {isModalOpen && <AddressModal handleClose={closeAddressModal}/>}
           </main>
     </div>
   )
