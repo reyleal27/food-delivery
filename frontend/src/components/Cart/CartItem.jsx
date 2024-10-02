@@ -27,13 +27,13 @@ const CartItem = () => {
                       <div className='flex justify-between items-center'>
                           <div className='flex items-center space-x-1'>
                               <IconButton className='flex' onClick={handleMinusQuantity}>
-                                  <RemoveCircleOutlineIcon  sx={{color: 'red'}} />
+                                  <RemoveCircleOutlineIcon  color='primary' />
 
                               </IconButton>
                               <div className='w-5 h-5 text-xs flex items-center justify-center'>{quantity }</div>
                               <IconButton className='flex' onClick={handleAddQuantity}>
                                  
-                                  <AddCircleOutlineIcon sx={{ color: 'red' }}  />
+                                  <AddCircleOutlineIcon color="primary" />
                               </IconButton>
                           </div>
                         </div>

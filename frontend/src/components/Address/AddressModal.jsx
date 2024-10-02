@@ -20,20 +20,25 @@ const style = {
 
 const AddressModal = ({ handleClose }) => {
   const initialValues = {
-    street: "",
+    streetAddress: "",
     city: "",
     state: "",
-    zip: "",
+    pincode: "",
   };
 
   const validationSchema = Yup.object({
-    street: Yup.string().required("Street is required"),
+    streetAddress: Yup.string().required("Street is required"),
     city: Yup.string().required("City is required"),
     state: Yup.string().required("State is required"),
-    zip: Yup.string().required("ZIP code is required"),
+    pincode: Yup.string().required("Pin code is required"),
   });
 
-  const handleSubmit = () => {};
+    
+      const handleSubmit = (values) => {
+    console.log("Form values:", values);
+    // Perform any action with the form values here
+  };
+
 
   return (
     <Modal
@@ -47,73 +52,75 @@ const AddressModal = ({ handleClose }) => {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
-        >
-          <Grid container spacing={2}>
-            <Grid size={12}>
-              <Field
-                as={TextField}
-                name="street"
-                label="street"
-                fullWidth
-                variant="outlined"
-                error={!!(<ErrorMessage name="street" />)}
-                helperText={
-                  <ErrorMessage name="street">
-                    {(msg) => <span className="text-red-600">{msg}</span>}
-                  </ErrorMessage>
-                }
-              ></Field>
-            </Grid>
-            <Grid size={6}>
-              <Field
-                as={TextField}
-                name="city"
-                label="city"
-                fullWidth
-                variant="outlined"
-                error={!!(<ErrorMessage name="city" />)}
-                helperText={
-                  <ErrorMessage name="city">
-                    {(msg) => <span className="text-red-600">{msg}</span>}
-                  </ErrorMessage>
-                }
-              ></Field>
-            </Grid>
-            <Grid size={6}>
-              <Field
-                as={TextField}
-                name="state"
-                label="state"
-                fullWidth
-                variant="outlined"
-                error={!!(<ErrorMessage name="state" />)}
-                helperText={
-                  <ErrorMessage name="state">
-                    {(msg) => <span className="text-red-600">{msg}</span>}
-                  </ErrorMessage>
-                }
-              ></Field>
-                      </Grid>
-                      <Grid size={12}>
-              <Field
-                as={TextField}
-                name="zip"
-                label="zip"
-                fullWidth
-                variant="outlined"
-                error={!!(<ErrorMessage name="zip" />)}
-                helperText={
-                  <ErrorMessage name="zip">
-                    {(msg) => <span className="text-red-600">{msg}</span>}
-                  </ErrorMessage>
-                }
-              ></Field>
-                      </Grid>
-                      <Grid size={12}>
-                          <Button variant="contained" fullWidth type="submit" color="primary">Deliver Here</Button>
-                      </Grid>
+              >
+                  {({ handleSubmit }) => (
+                      <Grid container spacing={2}>
+                          <Grid size={12}>
+                              <Field
+                                  as={TextField}
+                                  name="streetAddress"
+                                  label="streetAddress"
+                                  fullWidth
+                                  variant="outlined"
+                                  error={!!(<ErrorMessage name="street" />)}
+                                  helperText={
+                                      <ErrorMessage name="street">
+                                          {(msg) => <span className="text-red-600">{msg}</span>}
+                                      </ErrorMessage>
+                                  }
+                              ></Field>
+                          </Grid>
+                          <Grid size={12}>
+                              <Field
+                                  as={TextField}
+                                  name="city"
+                                  label="city"
+                                  fullWidth
+                                  variant="outlined"
+                                  error={!!(<ErrorMessage name="city" />)}
+                                  helperText={
+                                      <ErrorMessage name="city">
+                                          {(msg) => <span className="text-red-600">{msg}</span>}
+                                      </ErrorMessage>
+                                  }
+                              ></Field>
+                          </Grid>
+                          <Grid size={12}>
+                              <Field
+                                  as={TextField}
+                                  name="state"
+                                  label="state"
+                                  fullWidth
+                                  variant="outlined"
+                                  error={!!(<ErrorMessage name="state" />)}
+                                  helperText={
+                                      <ErrorMessage name="state">
+                                          {(msg) => <span className="text-red-600">{msg}</span>}
+                                      </ErrorMessage>
+                                  }
+                              ></Field>
+                          </Grid>
+                          <Grid size={12}>
+                              <Field
+                                  as={TextField}
+                                  name="pincode"
+                                  label="pincode"
+                                  fullWidth
+                                  variant="outlined"
+                                  error={!!(<ErrorMessage name="pincode" />)}
+                                  helperText={
+                                      <ErrorMessage name="pincode">
+                                          {(msg) => <span className="text-red-600">{msg}</span>}
+                                      </ErrorMessage>
+                                  }
+                              ></Field>
+                          </Grid>
+                          <Grid size={12}>
+                              <Button variant="contained" fullWidth type="submit" onClick={handleSubmit} color="primary">Deliver Here</Button>
+                          </Grid>
                      
-          </Grid>
+                      </Grid>
+                  )}
         </Formik>
       </Box>
     </Modal>

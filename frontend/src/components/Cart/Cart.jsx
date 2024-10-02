@@ -17,7 +17,11 @@ const Cart = () => {
     const closeAddressModal = () => {
         setIsModalOpen(false);
     };
-    
+
+    const handleSubmit = (value) => {
+        console.log("form value", value)
+    }
+
   return (
       <div>
           <main className='lg:flex justify-between'>
