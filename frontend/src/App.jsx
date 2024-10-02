@@ -4,6 +4,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import darkTheme  from './components/Theme/DarkTheme';
 import Home from './components/Home/Home';
 import RestaurantDetails from './components/Restaurant/RestaurantDetails';
+import Cart from './components/Cart/Cart';
 
 const App = () => {
   return (
@@ -11,7 +12,8 @@ const App = () => {
     <CssBaseline/>
       <Navbar/>
       {/* <Home/> */}
-      <RestaurantDetails/>
+      {/* <RestaurantDetails/> */}
+      <Cart/>
       </ThemeProvider>
   )
 }
