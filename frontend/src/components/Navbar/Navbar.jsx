@@ -8,12 +8,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Navbar = () => {
   return (
-      <header className='flex justify-between items-center gap-3 px-5 z-50 py-[0.8rem] bg-[#bc397d9d] lg:px-20 '>
-      
-      {/* <Link to='/' className='flex items-center gap-2 text-lg'>
-        <img className='w-10' src={logo} alt='logo' />
-        Food Express</Link> */}
-
+      <header className='flex sticky top-0 justify-between items-center gap-3 px-5 z-[1000] py-[0.8rem] bg-[#442442] lg:px-20 '>
         <div className='lg:mr-10 flex items-center space-x-4'>
           <Link to='/' className='logo flex items-center gap-3 font-semibold text-gray-300 md:text-xl lg:text-2xl'>
            <img className='w-10' src={logo} alt='logo' />  
