@@ -42,17 +42,17 @@ const menu = [
   },
 ];
 
-const ProfileNavigations = ({open, handleClose}) => {
+const ProfileNavigations = ({open}) => {
     const isSmallScreen = useMediaQuery("(max-width: 900px)");
     const navigate = useNavigate();
-    const handleNavigate = () => navigate
+  const handleNavigate = (item) => navigate(`/myprofile/${item.title.toLowerCase()}`);
 
   return (
     <div >
       <Drawer
         anchor="left"
         variant={isSmallScreen ? "temporary" : "permanent"}
-        onClose={handleClose}
+        // onClose={handleClose}
               open={isSmallScreen ? open : true}
            PaperProps={{
                     sx: {
@@ -62,8 +62,8 @@ const ProfileNavigations = ({open, handleClose}) => {
       >
         <div className="w-[50vw] lg:w-[20vw] h-[100vh] flex flex-col gap-6 pt-16 justify-center text-xl">
                   {menu.map((item, index) => (
-                <div key={index}>
-                      <div  className="px-5 py-5 cursor-pointer">
+                    <div key={index} onClick={() => handleNavigate(item)}>
+                      <div  className="px-5 py-5 cursor-pointer" >
               {item.icon}
               <span className="px-3">{item.title}</span>
           

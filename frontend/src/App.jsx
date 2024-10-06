@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import RestaurantDetails from './components/Restaurant/RestaurantDetails';
 import Cart from './components/Cart/Cart';
 import Profile from './components/Profile/Profile';
+import CustomerRoute from './components/Routers/CustomerRoute';
 
 const App = () => {
   return (
@@ -15,7 +16,8 @@ const App = () => {
       {/* <Home/> */}
       {/* <RestaurantDetails/> */}
       {/* <Cart/> */}
-      <Profile/>
+      {/* <Profile /> */}
+      <CustomerRoute/>
       </ThemeProvider>
   )
 }

@@ -1,16 +1,35 @@
 import React, { useState } from 'react'
 import ProfileNavigations from './ProfileNavigations'
+import { Route,Routes } from 'react-router-dom';
+import UserProfile from '../ProfileNav/UserProfile';
+import Orders from '../ProfileNav/Orders';
+import Favorites from '../ProfileNav/Favorites';
+import Address from '../ProfileNav/Address';
+import Notification from '../ProfileNav/Notification';
+import Payment from '../ProfileNav/Payment';
+import Events from '../ProfileNav/Events';
+import Home from '../Home/Home';
+
 
 const Profile = () => {
     const [openSidebar, setOpenSidebar] = useState(false);
-    const handleClose = () => {}
 
   return (
       <div className='lg:flex justify-between'>
           <div className='relative h-[80vh] lg:w-[20%]'>
-              <ProfileNavigations open={openSidebar} handleClose={handleClose}/>
+              <ProfileNavigations open={openSidebar} />
           </div>
           <div className='lg:w-[80%]'>
+              <Routes>
+                  <Route path='/' element={<UserProfile />} />
+                  <Route path='/orders' element={<Orders />} />
+                  <Route path='/favorite' element={<Favorites/>} />
+                  <Route path='/address' element={<Address/>}/>
+                  <Route path='/notification' element={<Notification/>}/>
+                  <Route path='/payment' element={<Payment />} />
+                  <Route path='/events' element={<Events />} />
+                  <Route path='/logout' element={<Home/>}/>
+              </Routes>
                
       </div>
       </div>
