@@ -16,12 +16,12 @@ const Profile = () => {
 
   return (
       <div className='lg:flex justify-between'>
-          <div className='relative h-[80vh] lg:w-[20%]'>
+          <div className='relative lg:h-[80vh] lg:w-[20%]'>
               <ProfileNavigations open={openSidebar} />
           </div>
           <div className='lg:w-[80%]'>
               <Routes>
-                  <Route path='/' element={<UserProfile />} />
+                  <Route path='/profile' element={<UserProfile />} />
                   <Route path='/orders' element={<Orders />} />
                   <Route path='/favorite' element={<Favorites/>} />
                   <Route path='/address' element={<Address/>}/>
