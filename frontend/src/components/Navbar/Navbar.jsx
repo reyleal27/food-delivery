@@ -26,8 +26,8 @@ const Navbar = () => {
         </li>
         <li>
           {false ? <Avatar sx={{ bgcolor: "white", cursor: "pointer", color: "violet" }} >C</Avatar> :
-            <IconButton>
-              <PersonIcon onClick={()=>navigate('/account/login') } />
+            <IconButton onClick={()=>navigate('/account/login') }>
+              <PersonIcon  />
             </IconButton>}
         </li>
         <li>

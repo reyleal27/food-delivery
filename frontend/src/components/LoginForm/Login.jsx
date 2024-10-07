@@ -2,6 +2,7 @@ import { Typography, TextField, Button } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 const initialValues = {
   email: "",
@@ -18,34 +19,59 @@ const SignupSchema = Yup.object().shape({
 const Login = () => {
   const handleSubmit = () => {};
   return (
-    <div className="flex flex-col items-center gap-2">
-      <Typography variant="h5">Login</Typography>
+    <div>
+      <Typography
+        variant="h5"
+        sx={{ textAlign: "center", marginBottom: "16px" }}
+      >
+        Login
+      </Typography>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={SignupSchema}
-      >
-        <Form>
+          >
+           
+              <Form>
+                  
           <Field
             as={TextField}
             name="email"
             label="email"
             fullWidth
-                      variant="outlined"
-                   
-                      
+            variant="outlined"
           />
           <Field
             as={TextField}
             name="password"
             label="password"
             fullWidth
-                      variant="outlined"
-                      margin='normal'
-                  />
-                  <Button sx={{marginTop:'10px', color:'white'} } fullWidth type='submit' variant="contained">Login</Button>
+            variant="outlined"
+            margin="normal"
+          />
+          <Button
+            sx={{ marginTop: "10px", color: "white", padding: "1rem" }}
+            fullWidth
+            type="submit"
+            variant="contained"
+            onClick={handleSubmit}
+          >
+            Login
+          </Button>
         </Form>
       </Formik>
+      <Typography
+        variant="body2"
+        sx={{ marginTop: "1rem", textAlign: "center" }}
+      >
+        Don't have an account?{" "}
+        <Link
+          to="/account/register"
+          className="text-red-500 underline uppercase"
+        >
+          Register
+        </Link>
+      </Typography>
     </div>
   );
 };
