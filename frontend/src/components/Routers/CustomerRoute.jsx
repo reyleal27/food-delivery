@@ -5,6 +5,7 @@ import Home from '../Home/Home';
 import RestaurantDetails from '../Restaurant/RestaurantDetails';
 import Cart from '../Cart/Cart';
 import Profile from '../Profile/Profile';
+import ModalComponent from '../Modal/Modal';
 
 const CustomerRoute = () => {
   return (
@@ -16,7 +17,9 @@ const CustomerRoute = () => {
               <Route path='/restaurant/:city:title/:id' element={<RestaurantDetails />} />
               <Route path='/cart' element={<Cart />} />
               <Route path='/myprofile/*' element={<Profile />} />
+             
           </Routes>
+           <ModalComponent/>
     </div>
   )
 }

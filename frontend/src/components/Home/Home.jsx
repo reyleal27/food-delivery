@@ -3,6 +3,8 @@ import './Home.css';
 import MultiItemCarousel from './MultiItemCarousel';
 import RestaurantCard from '../Restaurant/RestaurantCard';
 
+import ModalComponent from '../Modal/Modal';
+
 
 const restaurant = [1, 1, 1, 1, 1];
 
@@ -31,7 +33,9 @@ const Home = () => {
               {restaurant.map((item) => <RestaurantCard />)} 
            </div>
           </section>
-          </div>
+          <ModalComponent/>
+      </div>
+      
   )
 }
 

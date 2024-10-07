@@ -1,12 +1,15 @@
 import React from 'react';
 import './Navbar.css';
 import logo from '../../assets/logo-colored.png';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { Avatar, Badge, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  // const handleLogin = navigate('/account/login');
   return (
       <header className='flex sticky top-0 justify-between items-center gap-3 px-5 z-[1000] py-[0.8rem] bg-[#442442] lg:px-20 '>
         <div className='lg:mr-10 flex items-center space-x-4'>
@@ -22,7 +25,10 @@ const Navbar = () => {
           </IconButton>
         </li>
         <li>
-          <Avatar sx={{ bgcolor: "white",cursor: "pointer",color: "violet"}} >C</Avatar>
+          {false ? <Avatar sx={{ bgcolor: "white", cursor: "pointer", color: "violet" }} >C</Avatar> :
+            <IconButton>
+              <PersonIcon onClick={()=>navigate('/account/login') } />
+            </IconButton>}
         </li>
         <li>
           <IconButton>
