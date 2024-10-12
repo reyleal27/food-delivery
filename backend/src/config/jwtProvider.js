@@ -1,12 +1,18 @@
 const jwt = require("jsonwebtoken");
+const { User } = require("../models/user.model");
 require("dotenv").config();
 
 const { SECRET_KEY } = process.env;
 
-const generateToken = (userId) => {
+const generateToken = async (userId) => {
     const token = jwt.sign({ userId: userId }, SECRET_KEY, {
-        expiresIn: "48h"
+        expiresIn: "1h"
     });
+    // const refreshToken = jwt.sign({ userId: userId }, SECRET_KEY, {
+    //     expiresIn: "7d"
+    // });
+    await User.findByIdAndUpdate(userId, { jwt: token });
+    console.log('token',token)
     return token;
 };
 

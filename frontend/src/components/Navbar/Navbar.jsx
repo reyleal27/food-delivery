@@ -6,8 +6,14 @@ import { Avatar, Badge, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
+import { useSelector } from 'react-redux';
+import { getLoginStatus, getUser } from '../State/Authentication/Selector';
+
 
 const Navbar = () => {
+
+  const user = useSelector(getUser);
+  const isLogin = useSelector(getLoginStatus);
   const navigate = useNavigate();
   // const handleLogin = navigate('/account/login');
   return (
@@ -25,7 +31,7 @@ const Navbar = () => {
           </IconButton>
         </li>
         <li>
-          {false ? <Avatar sx={{ bgcolor: "white", cursor: "pointer", color: "violet" }} >C</Avatar> :
+          {isLogin ? <Avatar sx={{ bgcolor: "white", cursor: "pointer", color: "violet" }}>{user.fullName.charAt(0)}</Avatar> :
             <IconButton onClick={()=>navigate('/account/login') }>
               <PersonIcon  />
             </IconButton>}

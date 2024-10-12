@@ -30,7 +30,7 @@ const Home = () => {
               <h4 className='text-2xl font-semibold text-gray-400 py-3 pb-5'>Orders from Our Handpicked Favorites</h4>
               <div className='flex justify-around flex-wrap gap-5 items-center'>
                   
-              {restaurant.map((item) => <RestaurantCard />)} 
+                  {restaurant.map((item, index) => <RestaurantCard key={index } />)} 
            </div>
           </section>
           <ModalComponent/>

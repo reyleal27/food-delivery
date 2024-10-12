@@ -11,9 +11,13 @@ import {
 import { Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../State/Authentication/Action";
+
+
 
 const initialValues = {
   fullName: "",
@@ -36,15 +40,23 @@ const SignupSchema = Yup.object().shape({
 });
 
 const RegisterForm = () => {
-  const [role, setRole] = useState("");
-  const [isPswdShown, setIsPswdShown] = useState(false);
-  const handleRoleChange = (e) => {
-    setRole(e.target.value);
-  };
+ 
+    const [isPswdShown, setIsPswdShown] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    
+    const handleSubmit = async (values) => {
+        try {
+            console.log("form values", values)
+        dispatch(registerUser({userData: values, navigate}))
+        } catch (error) {
+            console.log(error.message)
+        }
+        
+    }
+  
 
-  const handleSubmit = (values) => {
-    console.log("form value", values);
-  };
   return (
     <div>
       <Typography
@@ -56,7 +68,19 @@ const RegisterForm = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        validationSchema={SignupSchema}
+              validationSchema={SignupSchema}
+              
+        //       onSubmit={(values, actions) => {
+        //   dispatch(handleRegistration(values)).then(a => {
+        //     if (a?.type === 'auth/signup/rejected') {
+        //       setErrorMessage(a?.payload);
+        //     }else if (a?.type === 'auth/signup/fulfilled') {
+        //     console.log('User payload:', a.payload.user); // Log the user payload
+        // }
+        //     console.log(errorMessage);
+        //   });
+        //   actions.resetForm();
+        // }}
       >
         <Form>
           <Field
@@ -68,7 +92,8 @@ const RegisterForm = () => {
             margin="normal"
           />
           <Field
-            as={TextField}
+                      as={TextField}
+                      type='email'
             name="email"
             label="email"
             fullWidth
@@ -86,7 +111,8 @@ const RegisterForm = () => {
           />
           <IconButton
             onClick={() => setIsPswdShown(!isPswdShown)}
-            sx={{ position: "absolute", top: "265px", left: "80%" }}
+                      sx={{ position: "absolute", top: "265px", left: "80%" }}
+                    //   sx={{ position: "absolute", top: "60%", right: "10px", transform: "translateY(-50%)" }}
           >
             {isPswdShown ? <VisibilityIcon /> : <VisibilityOffIcon />}
           </IconButton>
@@ -94,13 +120,15 @@ const RegisterForm = () => {
           <FormControl fullWidth margin="normal">
             <InputLabel id="role-select-label">Role</InputLabel>
             <Field
-              as={Select}
-              labelId="role-select-label"
+                          as={Select}
+                          labelId="role-select-label"
                           id="role-select"
                           name="role"
-              label="Role"
+                          label="Role"
+                          
+                          
             >
-              <MenuItem value={"ROLE_CUSTOMER"}>Customer</MenuItem>
+              <MenuItem value={"ROLE_CUSTOMER"} >Customer</MenuItem>
               <MenuItem value={"ROLE_RESTAURANT_OWNER"}>
                 Restaurant Owner
               </MenuItem>

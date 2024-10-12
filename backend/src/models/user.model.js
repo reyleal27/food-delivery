@@ -5,20 +5,29 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Name is required"],
   },
-  password: {
-    type: String,
-    required: [true, "Password is required"],
-  },
-  email: {
+   email: {
     type: String,
     required: [true, "Email is required"],
     unique: true,
+  },
+  password: {
+    type: String,
+    required: [true, "Password is required"],
   },
   role: {
     type: String,
     enum: ["ROLE_CUSTOMER", "ROLE_RESTAURANT_OWNER"],
     default: "ROLE_CUSTOMER",
   },
+
+    jwt: {
+      type: String,
+      default: "",
+    },
+    // refreshToken: {
+    //   type: String,
+    //   default: "",
+    // },
   orders: {
     type: Schema.Types.ObjectId,
     ref: "Order",
