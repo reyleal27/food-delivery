@@ -22,7 +22,7 @@ module.exports = {
 //   if (!user) {
 //       return res.status(401).json({ error: "Invalid signature" });
 //   }
-            res.status(200).json({fullName: user.fullName,email:user.email });
+            res.status(200).json({fullName: user.fullName,email:user.email, role: user.role});
         }catch (error) {
             if (error instanceof Error) {
                 res.status(400).json({ error: error.message });

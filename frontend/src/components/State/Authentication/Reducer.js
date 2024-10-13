@@ -71,7 +71,8 @@
 
 
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser,getUser, loginUser} from './Action';
+import { registerUser,getUser, loginUser, logout, addToFavorite} from './Action';
+import { isPresentInFavorites } from '../../services/logic';
 
 const initialState = {
   user: null,
@@ -94,9 +95,9 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(registerUser.fulfilled, (state, action) => {
-                state.user = action.payload;
+                state.user = action.payload.user;
                 state.isLoading = false;
-                state.jwt = action.payload;
+                state.jwt = action.payload.jwt;
             })
             .addCase(registerUser.rejected, (state, action) => {
                 state.isLoading = false;
@@ -110,28 +111,65 @@ const authSlice = createSlice({
                 state.user = action.payload;
                 state.isLoading = false;
                 state.isLogin = true;
+            
             })
             .addCase(getUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
                 state.isLogin = false;
             })
-         .addCase(loginUser.pending, (state) => {
+            .addCase(loginUser.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
             })
             .addCase(loginUser.fulfilled, (state, action) => {
-                state.user = action.payload;
+                state.user = action.payload.user;
                 state.isLoading = false;
-                state.jwt = action.payload;
+                state.jwt = action.payload.jwt;
                 state.isLogin = true
+               
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
                 state.isLogin = false;
             })
-    },
+            .addCase(logout.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(logout.fulfilled, (state) => {
+                return initialState;
+            }) 
+            .addCase(logout.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+            .addCase(addToFavorite.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(addToFavorite.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.isLoading = false;
+                state.jwt = action.payload;
+                state.isLogin = true;
+                state.error = null;
+                favorites = isPresentInFavorites(state.favorites, action.payload) ? 
+                    state.favorites.filter((item) => item.id !== action.payload.id) : 
+[action.payload, ...state.favorites]
+//         isLoading: false,
+//         error: null,
+//         favorites: isPresentInFavorites(state.favorites, action.payload)
+//           ? state.favorites.filter((item) => item.id !== action.payload.id)
+//           : [action.payload, ...state.favorites],
+            })
+            .addCase(addToFavorite.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+                state.isLogin = false;
+            })
+    }
 });
 
 export default authSlice.reducer;

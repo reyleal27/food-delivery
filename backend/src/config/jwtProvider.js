@@ -17,8 +17,12 @@ const generateToken = async (userId) => {
 };
 
 const getUserIdFromToken = (token) => {
-    const decodedToken = jwt.verify(token, SECRET_KEY);
-    return decodedToken.userId;
+    try {
+        const decodedToken = jwt.verify(token, SECRET_KEY);
+        return decodedToken.userId;
+    } catch (error) {
+        console.log('invalid token', error.message)
+    }
 };
 
 module.exports = {

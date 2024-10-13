@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../State/Authentication/Action";
 
+
 const menu = [
   {
     icon: <HomeIcon />,
@@ -48,49 +49,48 @@ const menu = [
   },
 ];
 
-const ProfileNavigations = ({ open }) => {
-  const isSmallScreen = useMediaQuery("(max-width: 900px)");
-  const navigate = useNavigate();
+const Navigations = ({open}) => {
+    const isSmallScreen = useMediaQuery("(max-width: 900px)");
+     const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleNavigate = (item) => {
-    if (item.title === "Logout") {
-      dispatch(logout());
-      navigate('/')
-    } else {
-      navigate(`/myprofile/${item.title.toLowerCase()}`)
+    const handleNavigate = (item) => {
+        if (item.title === "Logout") {
+            dispatch(logout());
+            navigate('/')
+        } else {
+            navigate(`/myprofile/${item.title.toLowerCase()}`)
+        }
     };
-
-     const [openSidebar, setOpenSidebar] = useState(false);
-    return (
+  return (
       <div>
-        
-        <Drawer
-          anchor="left"
-          variant={isSmallScreen ? "temporary" : "permanent"}
-          // onClose={handleClose}
-          open={isSmallScreen ? open : true}
-          PaperProps={{
+          <div className="w-[50vw] lg:w-[20vw] h-[90vh] flex flex-col pt-24 justify-center text-xl">
+              <Drawer
+                  anchor="left"
+                  variant={isSmallScreen ? "temporary" : "permanent"}
+                  open={isSmallScreen ? open : true}
+                  PaperProps={{
             sx: {
-              zIndex: 1,
+                          zIndex: 1,
+                marginTop: '4rem'
             },
           }}
-        >
-          <div className="w-[50vw] lg:w-[20vw] h-[90vh] flex flex-col pt-24 justify-center text-xl">
-            {menu.map((item, index) => (
-              <div key={index} onClick={() => handleNavigate(item)}>
+              >
+                  
+          {menu.map((item,index) =>  <div key={index} onClick={() => handleNavigate(item)}>
                 <div className="px-5 py-6 cursor-pointer">
                   {item.icon}
                   <span className="px-3">{item.title}</span>
                 </div>
                 {index !== menu.length - 1 && <Divider />}
-              </div>
-            ))}
-          </div>
-        </Drawer>
-      </div>
-    );
-  };
-};
+              </div>)}
+             </Drawer>
+                  
+           </div>
+          
+             
+    </div>
+  )
+}
 
-export default ProfileNavigations;
+export default Navigations

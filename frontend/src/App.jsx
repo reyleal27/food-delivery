@@ -15,24 +15,24 @@ const App = () => {
   const dispatch = useDispatch();
   const userData = useSelector((store) => store.auth)
 
-  // useEffect(() => {
-  //   if (jwt) {
-  //     dispatch(getUser(userData.jwt || jwt))
-  //   }
-  // },[dispatch,jwt])
-
   useEffect(() => {
-    if (jwt && (!userData.jwt || userData.jwt !== jwt)) {
-        dispatch(getUser(jwt));
+    if (jwt) {
+      dispatch(getUser(userData.jwt || jwt))
     }
-  }, [dispatch, jwt, userData.jwt]);
+  },[dispatch,jwt])
+
+  // useEffect(() => {
+  //   if (jwt && (!userData.jwt || userData.jwt !== jwt)) {
+  //       dispatch(getUser(jwt));
+  //   }
+  // }, [dispatch, jwt, userData.jwt]);
   console.log('userData',userData)
 
   
   return (
     <ThemeProvider theme={darkTheme}>
     <CssBaseline/>
-      <Navbar />
+      {/* <Navbar /> */}
       {/* <Home/> */}
       {/* <RestaurantDetails/> */}
       {/* <Cart/> */}

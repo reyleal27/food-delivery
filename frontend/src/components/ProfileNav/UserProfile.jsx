@@ -1,8 +1,20 @@
 import React from 'react';
 import { Avatar, Button } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { logout } from '../State/Authentication/Action';
+import { useNavigate } from 'react-router-dom';
+
 
 const UserProfile = () => {
-  const handleLogout = () =>{}
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // const handleLogout = () => {
+  //   dispatch(logout())
+  //     .then(() => {
+  //       navigate('/')
+  //     });
+  // }
   return (
     <div className='flex items-center flex-col justify-center min-h-[80vh] text-center'>
       <Avatar
@@ -13,7 +25,7 @@ const UserProfile = () => {
       />
       <h2 className='py-5 text-2xl font-semibold'>Hello World</h2>
       <p className='pb-5 text-sm'>Email: helloworld@gmail.com</p>
-      <Button variant='contained' onClick={handleLogout } sx={{padding: '0.5rem 2rem', color:'white'}} >Logout</Button>
+      <Button variant='contained'  sx={{padding: '0.5rem 2rem', color:'white'}} >Logout</Button>
     </div>
   )
 }

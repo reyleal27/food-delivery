@@ -13,8 +13,19 @@ import { getLoginStatus, getUser } from '../State/Authentication/Selector';
 const Navbar = () => {
 
   const user = useSelector(getUser);
-  const isLogin = useSelector(getLoginStatus);
   const navigate = useNavigate();
+  console.log('navbar',user)
+  const isLogin = useSelector(getLoginStatus);
+  const handleAvatarClick = () => {
+    if (user?.role === "ROLE_RESTAURANT_OWNER") {
+      navigate('/admin/restaurant')
+      console.log('im the owner', user.role)
+    } else {
+      console.log('im customer')
+    navigate('/myprofile')
+    }
+  }
+
   // const handleLogin = navigate('/account/login');
   return (
       <header className='flex sticky top-0 justify-between items-center gap-3 px-5 z-[1000] py-[0.8rem] bg-[#442442] lg:px-20 '>
@@ -31,7 +42,7 @@ const Navbar = () => {
           </IconButton>
         </li>
         <li>
-          {isLogin ? <Avatar sx={{ bgcolor: "white", cursor: "pointer", color: "violet" }}>{user.fullName.charAt(0)}</Avatar> :
+          {user && user.fullName ? <Avatar onClick={handleAvatarClick } sx={{ bgcolor: "white", cursor: "pointer", color: "violet" }}>{user.fullName[0].toUpperCase()}</Avatar> :
             <IconButton onClick={()=>navigate('/account/login') }>
               <PersonIcon  />
             </IconButton>}

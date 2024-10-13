@@ -14,11 +14,12 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 const CustomerRoute = () => {
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
+          {/* <Route> */}
           <Route element={<PublicRoute />}>
-            <Route path="/" element={<Home />} />
+            <Route index element={<Home />} />
             <Route path="/account/register" element={<Home />} />
             <Route path="/account/login" element={<Home />} />
             <Route
@@ -26,12 +27,13 @@ const CustomerRoute = () => {
               element={<RestaurantDetails />}
             />
             <Route path="/cart" element={<Cart />} />
-                  </Route>
-                  <Route element={<PrivateRoute />}>
-                  <Route path="/myprofile/*" element={<Profile/>}/>
-                  </Route>
-              </Routes>
-              
+          </Route>
+          {/* <Route> */}
+          <Route path="/myprofile/*"  element={<PrivateRoute />}>
+            <Route path='*' element={<Profile />} />
+          </Route>
+        </Routes>
+
         <ModalComponent />
       </Suspense>
     </div>

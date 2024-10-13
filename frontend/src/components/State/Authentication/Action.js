@@ -1,8 +1,19 @@
-import axios from 'axios';
-import { ADD_TO_FAVORITE_REQUEST, ADD_TO_FAVORITE_SUCCESS, GET_USER_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from './ActionType';
-import { api, API_URL } from '../../services/api';
-import { toast } from 'react-toastify';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from "axios";
+import {
+  ADD_TO_FAVORITE_REQUEST,
+  ADD_TO_FAVORITE_SUCCESS,
+  GET_USER_SUCCESS,
+  LOGIN_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  REGISTER_FAILURE,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+} from "./ActionType";
+import { api, API_URL } from "../../services/api";
+import { toast } from "react-toastify";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // export const registerUser = createAsyncThunk('auth/registerUser',
 //     async (dispatch,reqData) => {
@@ -11,7 +22,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 //             const { data } = await axios.post(`${API_URL}/auth/signup`, reqData.userData)
 //             console.log('data', data)
 //             if (data.jwt) localStorage.setItem("jwt", data.jwt);
-        
+
 //             if (data.role === "ROLE_RESTAURANT_OWNER") {
 //                 reqData.navigate("/admin/restaurant")
 //             } else {
@@ -25,8 +36,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 //         }
 //     }
 // );
-
-
 
 // export const registerUser = (reqData) => {
 //     return async (dispatch) => {
@@ -90,8 +99,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 //     }
 // };
 
-
-
 // export const addToFavorite = ({jwt, restaurantId}) => {
 //     async (dispatch, { rejectWithValue }) => {
 //         dispatch({ type: ADD_TO_FAVORITE_REQUEST })
@@ -100,7 +107,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 //                 headers: {
 //                     Authorization:`Bearer ${jwt}`
 //                 }
-//             })         
+//             })
 //             dispatch({ type: ADD_TO_FAVORITE_SUCCESS, payload: data });
 //             console.log("added to favorite", data);
 //         } catch (error) {
@@ -110,7 +117,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 //         }
 //     }
 // };
-
 
 // export const logout = () => {
 //     async (dispatch, { rejectWithValue }) => {
@@ -126,66 +132,99 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 //     }
 // };
 
-
-
-
-
-
-
-
-
 export const registerUser = createAsyncThunk(
-    'auth/signup',
-    async (reqData, { rejectWithValue }) => {
-        try {
-            const { data } = await axios.post(`${API_URL}auth/signup`, reqData.userData);
-            console.log('register data', data)
-            if (data.jwt) localStorage.setItem("jwt", data.jwt);
+  "auth/signup",
+  async (reqData, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${API_URL}auth/signup`,
+        reqData.userData
+      );
+      console.log("register data", data);
+      if (data.jwt) localStorage.setItem("jwt", data.jwt);
 
-            if (data.role === "ROLE_RESTAURANT_OWNER") {
-                reqData.navigate("/admin/restaurant");
-            } else {
-                reqData.navigate('/');
-            }
-            return data.jwt;
-        } catch (error) {
-            return rejectWithValue(error.response.data.message || error.message);
-        }
-    });
-
-
- export const loginUser = createAsyncThunk(
-    'auth/loginUser',
-    async (reqData, { rejectWithValue }) => {
-        try {
-            const { data } = await axios.post(`${API_URL}auth/login`, reqData.userData);
-            console.log('login',data)
-            if (data.jwt) localStorage.setItem("jwt", data.jwt);
-            if (data.role === "ROLE_RESTAURANT_OWNER") {
-                reqData.navigate("/admin/restaurant");
-            } else {
-                reqData.navigate('/');
-            }
-            return data;
-        } catch (error) {
-            return rejectWithValue(error.response.data.message || error.message);
-        }
+      if (data.role === "ROLE_RESTAURANT_OWNER") {
+        reqData.navigate("admin/restaurant");
+      } else {
+        reqData.navigate("/");
+      }
+      return data.jwt;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message || error.message);
     }
+  }
 );
 
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async (reqData, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${API_URL}auth/login`,
+        reqData.userData
+      );
+      console.log("login", data);
+      if (data.jwt) localStorage.setItem("jwt", data.jwt);
+      if (data.role === "ROLE_RESTAURANT_OWNER") {
+        reqData.navigate("/admin/restaurant");
+      } else {
+        reqData.navigate("/");
+      }
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message || error.message);
+    }
+  }
+);
 
 export const getUser = createAsyncThunk(
-    'api/user/getUser',
-    async (jwt, { rejectWithValue }) => {
-        try {
-            const { data } = await axios.get(`${API_URL}api/users/profile`, {
-                headers: {
-                    Authorization: `Bearer ${jwt}`
-                }
-            });
-            return data;
-        } catch (error) {
-            return rejectWithValue(error.response.data.message || error.message);
-        }
+  "api/user/getUser",
+  async (jwt, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`${API_URL}api/users/myprofile`, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message || error.message);
     }
+  }
+);
+
+export const logout = createAsyncThunk(
+  "api/users/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      localStorage.clear();
+      console.log("Logout success");
+      return {}; // Return an empty object or whatever payload you deem necessary
+    } catch (error) {
+      toast.error(`Sorry, failed to logout. Try again.`);
+      console.log("toast", toast);
+      return rejectWithValue(error.response.data.message || error.message);
+    }
+  }
+);
+
+export const addToFavorite = createAsyncThunk(
+  "api/restaurants/addtofavorite",
+  async ({ jwt, restaurantId }, { rejectWithValue }) => {
+    try {
+      const { data } = await api.put(
+        `/api/restaurant/${restaurantId}/add-favorites`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      toast.error(`Failed to add favorite`);
+      return rejectWithValue(error.response.data.message || error.message);
+    }
+  }
 );

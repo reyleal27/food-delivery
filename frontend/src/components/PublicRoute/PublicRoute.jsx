@@ -6,7 +6,7 @@ import { Navigate, Outlet} from 'react-router-dom';
 
 const PublicRoute = () => {
     const isLogin = useSelector(getLoginStatus);
-    console.log(isLogin);
+    console.log('publicroute',!isLogin);
   return (
       <>
           {!isLogin ? (
