@@ -24,8 +24,32 @@ const restaurantsSlice = createSlice({
             .addCase(getAllRestaurantAction.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
-            });
-    },
+            })
+            .addCase(getRestaurantById.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(getRestaurantById.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.restaurant = action.payload;
+            })
+            .addCase(getRestaurantById.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+            .addCase(getRestaurantByUserId.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(getRestaurantByUserId.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.restaurantByUser = action.payload;
+            })
+            .addCase(getRestaurantByUserId.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+    }
 });
 
 export default restaurantsSlice.reducer;

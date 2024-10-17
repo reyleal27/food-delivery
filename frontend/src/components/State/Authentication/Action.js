@@ -136,8 +136,8 @@ export const registerUser = createAsyncThunk(
   "auth/signup",
   async (reqData, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(
-        `${API_URL}auth/signup`,
+      const { data } = await api.post(
+        `/auth/signup`,
         reqData.userData
       );
       console.log("register data", data);
@@ -159,8 +159,8 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (reqData, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(
-        `${API_URL}auth/login`,
+      const { data } = await api.post(
+        `/auth/login`,
         reqData.userData
       );
       console.log("login", data);
@@ -181,10 +181,10 @@ export const getUser = createAsyncThunk(
   "api/user/getUser",
   async (jwt, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`${API_URL}api/users/myprofile`, {
+      const { data } = await api.get(`/api/users/myprofile`, {
         headers: {
           Authorization: `Bearer ${jwt}`,
-        },
+        }, 
       });
       return data;
     } catch (error) {

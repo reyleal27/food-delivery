@@ -9,15 +9,19 @@ import Profile from './components/Profile/Profile';
 import CustomerRoute from './components/Routers/CustomerRoute';
 import { useDispatch, useSelector} from 'react-redux';
 import { getUser } from './components/State/Authentication/Action';
+import { useNavigate } from 'react-router-dom';
 
 const App = () => {
   const jwt = localStorage.getItem('jwt');
   const dispatch = useDispatch();
-  const userData = useSelector((store) => store.auth)
+  const userData = useSelector((store) => store.auth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (jwt) {
       dispatch(getUser(userData.jwt || jwt))
+    } else {
+       navigate('/')
     }
   },[dispatch,jwt])
 
