@@ -9,12 +9,12 @@ const UserProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const handleLogout = () => {
-  //   dispatch(logout())
-  //     .then(() => {
-  //       navigate('/')
-  //     });
-  // }
+  const handleLogout = () => {
+    dispatch(logout())
+      .then(() => {
+        navigate('/')
+      });
+  }
   return (
     <div className='flex items-center flex-col justify-center min-h-[80vh] text-center'>
       <Avatar
@@ -25,7 +25,7 @@ const UserProfile = () => {
       />
       <h2 className='py-5 text-2xl font-semibold'>Hello World</h2>
       <p className='pb-5 text-sm'>Email: helloworld@gmail.com</p>
-      <Button variant='contained'  sx={{padding: '0.5rem 2rem', color:'white'}} >Logout</Button>
+      <Button onClick={handleLogout } variant='contained'  sx={{padding: '0.5rem 2rem', color:'white'}} >Logout</Button>
     </div>
   )
 }
